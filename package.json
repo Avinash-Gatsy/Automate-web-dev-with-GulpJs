@@ -1,0 +1,19 @@
+{
+  "name": "gulp-website-hands-on",
+  "version": "1.0.0",
+  "description": "Automate web development with Gulp Js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Avinash Gatreddi",
+  "license": "ISC",
+  "dependencies": {
+    "static-server": "^2.2.1"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-livereload": "^4.0.2",
+    "gulp-uglify": "^3.0.2"
+  }
+}

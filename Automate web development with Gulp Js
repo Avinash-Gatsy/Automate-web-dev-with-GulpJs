@@ -1,0 +1,85 @@
+Automate web development with Gulp Js
+------------------------------------------------------------
+INTRO
+------------------------------------------------------------
+install globally
+	avinash ~ $ sudo npm install --global gulp-cli
+
+local
+	avinash gulp-website-hands-on $ npm install gulp --save
+	avinash gulp-website-hands-on $ gulp -v
+	CLI version: 2.2.0
+	Local version: 4.0.2
+
+create a 'gulpfile.js' -> gulp taks will check for same file name, hence, keep the same name
+
+create a new gulp task
+
+	gulp.task('name', fn()) will take 2 arguments
+	1st is the name of the task
+	2nd is a function to run when the task is executed
+
+run the task by passing task name after gulp in terminal
+	$ gulp <task name>
+
+we can have a default task to execute when no args are passed with gulp command in terminal
+
+	gulp.task('default', ()=>{
+		console.log('starting default task');
+	});
+	
+	$ gulp
+
+gulp-uglify
+
+	var uglify = require('gulp-uglify');
+	gulp.task('scripts', ()=>{
+		
+		return gulp.src('public/scripts/*.js')
+		.pipe(uglify())
+		.pipe(gulp.dest('public/dist'));
+	});
+------------------------------------------------------------
+GULP WATCH & LIVE RELOAD
+------------------------------------------------------------
+avinash gulp-website-hands-on $ npm install static-server --save
+
+refer to server.js file
+
+Gulp Watch -> 
+watch for file changes and executed a gulp task
+
+	//watch task
+	//pass task to be executed as an arg to gulp.series()
+	gulp.task('watch', ()=>{
+		require('./server'); //run the server
+		gulp.watch(SCRIPTS_PATH, gulp.series('scripts'));
+	});
+
+Gulp - Live Reload
+	avinash gulp-website-hands-on $ npm install gulp-livereload --save-dev
+gulpfile.js
+	var livereload = require('gulp-livereload');
+
+	add livereload() to the gulp task on which live reload should happen, whenever there is a change in dist folder it will refresh the browser
+
+	gulp.task('scripts', ()=>{
+		return gulp.src(SCRIPTS_PATH)
+		.pipe(uglify())
+		.pipe(gulp.dest('public/dist'))
+		.pipe(livereload());
+	});
+
+	listen to livereload server
+	gulp.task('watch', ()=>{
+		require('./server'); //run the server
+		livereload.listen(); //listening to livereload server
+		gulp.watch(SCRIPTS_PATH, gulp.series('scripts'));
+	});
+
+finally in index.html add ->
+	<script src="http://localhost:35729/livereload.js"></script>
+------------------------------------------------------------
+CSS, SCSS and LESS with Gulp
+------------------------------------------------------------
+
